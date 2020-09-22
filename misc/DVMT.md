@@ -1,14 +1,14 @@
-# Fixing CFG Lock
+# Fixing DVMT
 
 
 
 
 
-Do note that this is only recommended for users who have already installed macOS, for users who are installing for the first time enable `AppleCpuPmCfgLock` and `AppleXcpmCfgLock` under `Kernel -> Quirks`
+Do note that this is only recommended for users who have already installed macOS, for users who are installing for the first time you need to add `framebuffer-patch-enable`, `framebuffer-stolenmem` and `framebuffer-fbmem` under `DeviceProperties -> Add -> PciRoot(0x0)/Pci(0x2,0x0)`. Refer to `confing.plist Setup` in `OpenCore Install Guide` onhow to do it.
 
-## What is CFG-Lock
+## What is DVMT Pre-Allocated
 
-CFG-Lock is a setting in your BIOS that allows for a specific register(in this case the MSR 0xE2) to be written to. By default, most motherboards lock this variable with many even hiding the option outright in the GUI. And why we care about it is that macOS actually wants to write to this variable, and not just one part of macOS. Instead both the Kernel(XNU) and AppleIntelPowerManagement want this register.
+DVMT Pre-Allocated is a setting in your BIOS that allows one to allocate(in this case the MSR 0xE2) to be written to. By default, most motherboards lock this variable with many even hiding the option outright in the GUI. And why we care about it is that macOS actually wants to write to this variable, and not just one part of macOS. Instead both the Kernel(XNU) and AppleIntelPowerManagement want this register.
 
 So to fix it we have 2 options:
 
